@@ -7,15 +7,23 @@
 </head>
 
 <body>
-
+    <section id="thedailyreadingapp">
+        <header id="header">
+            <h1>TheDailyReading</h1>
+            <input id="new-reading" placeholder="Add Url" autofocus>
+        </header>
+        <section id="main">
+            <ul id="reading-list"></ul>
+        </section>
+        <footer id="footer"></footer>
+    </section>
     <script id="readingTemplate" type="text/template">
 
     </script>
-
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/underscore-min.js"></script>
     <script src="js/lib/backbone-min.js"></script>
-    <script src="js/models/example.js"></script>
+    <script src="js/models/reading.js"></script>
     <script src="js/collections/example.js"></script>
     <script src="js/views/example.js"></script>
     <script src="js/app.js"></script>
