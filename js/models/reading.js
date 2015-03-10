@@ -1,10 +1,11 @@
 // Global backbone app
 var App = App || {};
 
+// Reading Model
 (function(){
   'use strict';
 
-  App.ReadingModel = Backbone.Model.extend({
+  App.Reading = Backbone.Model.extend({
     defaults: {
     	title: '',
     	url: '#'

@@ -1,3 +1,3 @@
-// site/js/app.js
+// js/app.js
 
-var app = app || {};
+var App = App || {};
