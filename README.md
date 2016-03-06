@@ -1,2 +1,2 @@
 # TheDailyReader
-A bookmarking app for daily reading, so you can read daily.
+A bookmarking app for daily reading.
