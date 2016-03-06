@@ -1,0 +1,30 @@
+{
+  "name": "the-daily-reader",
+  "version": "1.0.0",
+  "description": "A Bookmarking app for daily reading.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaibhavmule/TheDailyReader.git"
+  },
+  "keywords": [
+    "bookmarking"
+  ],
+  "author": "Vaibhav Mule <vaibhavmule135@gmail.com> (http://github.com/vaibhavmule)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vaibhavmule/TheDailyReader/issues"
+  },
+  "homepage": "https://github.com/vaibhavmule/TheDailyReader/",
+  "devDependencies": {
+    "jsx-loader": "^0.12.2",
+    "react-hot-loader": "^1.1.1",
+    "webpack": "^1.5.1",
+    "webpack-dev-server": "1.6.4"
+  },
+  "dependencies": {
+    "react": "^0.12.0"
+  }
+}
