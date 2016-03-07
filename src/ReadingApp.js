@@ -14,21 +14,21 @@ export default class ReadingApp extends Component {
     }
   };
 
-  onChangeLink = (e) => {
-    this.setState({link: e.target.value});
+  onChangeLink = (event) => {
+    this.setState({link: event.target.value});
   };
 
-  onChangeTitle = (e) => {
-    this.setState({title: e.target.value});
+  onChangeTitle = (event) => {
+    this.setState({title: event.target.value});
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
 
     if (!_.includes(this.state.link, 'http')) {
       this.state.link = 'http://' + this.state.link;
     }
-    var nextItems = this.state.items.concat([{link: this.state.link, id: Date.now(), title: this.state.title}]);
+    var nextItems = this.state.items.concat([{link: this.state.link, id: Date.now(), title: this.state.title || this.state.link }]);
     this.setState({items: nextItems, link: '', title: ''});
   };
 
@@ -37,7 +37,7 @@ export default class ReadingApp extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>link: </label>
-          <input onChange={this.onChangeLink} value={this.state.link}/>
+          <input onChange={this.onChangeLink} value={this.state.link} required/>
           <label>title: </label>
           <input onChange={this.onChangeTitle} value={this.state.title}/>
           <button>Add</button>
