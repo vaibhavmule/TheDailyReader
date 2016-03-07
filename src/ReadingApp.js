@@ -8,9 +8,10 @@ export default class ReadingApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: [],
+      items: {},
+      id: '',
       link: '',
-      title: '',
+      title: ''
     }
   };
 
@@ -20,14 +21,23 @@ export default class ReadingApp extends Component {
 
   onChangeTitle = (event) => {
     this.setState({title: event.target.value});
-  };
+  }; 
 
-  deleteItem = (item) => {
-    const confirmation = window.confirm('Are you sure you want to delete ' + item.title + '?')
-    if (confirmation) {
-      _.pull(this.state.items, item)
+  deleteItem = (id, title) => {
+    const confirmation = window.confirm('Are you sure you want to delete ' + title + '?')
+    
+    if (confirmation && this.state.items.hasOwnProperty(id)) {
+      delete this.state.items[id];
       this.forceUpdate()
     }
+  };
+
+  updateItem = (id, item) => {
+    this.setState({
+      id: id,
+      link: item.link,
+      title: item.title
+    })
   };
 
   handleSubmit = (event) => {
@@ -36,14 +46,27 @@ export default class ReadingApp extends Component {
     if (!_.includes(this.state.link, 'http')) {
       this.state.link = 'http://' + this.state.link;
     }
-    
-    var nextItems = this.state.items.concat([{
-      link: this.state.link, 
-      id: Date.now(), 
-      title: this.state.title || this.state.link 
-    }]);
 
-    this.setState({items: nextItems, link: '', title: ''});
+    if (!_.isEmpty(this.state.id)) {
+      if (this.state.items[this.state.id]) {
+        this.state.items[this.state.id] = {
+          link: this.state.link,
+          title: this.state.title || this.state.link
+        }
+      }
+      this.setState({
+        id: ''
+      })
+    } else {
+
+      var id = Date.now()
+      var nextItems = this.state.items[id] = {
+        link: this.state.link,
+        title: this.state.title || this.state.link 
+      };
+    }
+
+    this.setState({link: '', title: ''});
   };
 
   render() {
@@ -51,12 +74,13 @@ export default class ReadingApp extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>link: </label>
-          <input onChange={this.onChangeLink} value={this.state.link} required/>
+          <input onChange={this.onChangeLink} value={this.state.link} title="Enter blog/website link" required/>
           <label>title: </label>
-          <input onChange={this.onChangeTitle} value={this.state.title}/>
-          <button>Add</button>
+          <input onChange={this.onChangeTitle} value={this.state.title} title="Enter display text"/>
+          {!_.isEmpty(this.state.id) && <button title="Edit">Edit</button> || <button title="Add blog to list">Add</button>}
         </form>
-        <ReadingList items={this.state.items} deleteItem={this.deleteItem}/>
+        <h2>Reading List</h2>
+        <ReadingList items={this.state.items} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
       </div>
     );
   }
