@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import ReadingApp from './ReadingApp';
 
 export default class App extends Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+      <div>
+        <h1>The Daily Reader</h1>
+        <hr/>
+        <br/>
+        <ReadingApp />
+      </div>
     );
   }
 }
