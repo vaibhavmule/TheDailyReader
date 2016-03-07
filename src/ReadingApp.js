@@ -22,13 +22,27 @@ export default class ReadingApp extends Component {
     this.setState({title: event.target.value});
   };
 
+  deleteItem = (item) => {
+    const confirmation = window.confirm('Are you sure you want to delete ' + item.title + '?')
+    if (confirmation) {
+      _.pull(this.state.items, item)
+      this.forceUpdate()
+    }
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
 
     if (!_.includes(this.state.link, 'http')) {
       this.state.link = 'http://' + this.state.link;
     }
-    var nextItems = this.state.items.concat([{link: this.state.link, id: Date.now(), title: this.state.title || this.state.link }]);
+    
+    var nextItems = this.state.items.concat([{
+      link: this.state.link, 
+      id: Date.now(), 
+      title: this.state.title || this.state.link 
+    }]);
+
     this.setState({items: nextItems, link: '', title: ''});
   };
 
@@ -42,7 +56,7 @@ export default class ReadingApp extends Component {
           <input onChange={this.onChangeTitle} value={this.state.title}/>
           <button>Add</button>
         </form>
-        <ReadingList items={this.state.items} />
+        <ReadingList items={this.state.items} deleteItem={this.deleteItem}/>
       </div>
     );
   }
