@@ -75,12 +75,12 @@ describe('crud operation', () => {
 
     it('delete the reading item to the state', () => {
       const state = Map();
-      const addOneItemToState = create(state, {
+      const addFirstItemToState = create(state, {
         id: 'abc123',
         link: 'http://vaibhavmule.com',
         title: 'vaibhav mule'
       });
-      const addSecondItemToState = create(addOneItemToState, {
+      const addSecondItemToState = create(addFirstItemToState, {
         id: 'foo123',
         link: 'http://foo-bar.com',
         title: 'foo bar'
