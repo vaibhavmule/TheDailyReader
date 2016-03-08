@@ -11,7 +11,8 @@ export default class ReadingApp extends Component {
       items: {},
       id: '',
       link: '',
-      title: ''
+      title: '',
+      done: false
     }
   };
 
@@ -22,23 +23,6 @@ export default class ReadingApp extends Component {
   onChangeTitle = (event) => {
     this.setState({title: event.target.value});
   }; 
-
-  deleteItem = (id, title) => {
-    const confirmation = window.confirm('Are you sure you want to delete ' + title + '?')
-    
-    if (confirmation && this.state.items.hasOwnProperty(id)) {
-      delete this.state.items[id];
-      this.forceUpdate()
-    }
-  };
-
-  updateItem = (id, item) => {
-    this.setState({
-      id: id,
-      link: item.link,
-      title: item.title
-    })
-  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -51,7 +35,8 @@ export default class ReadingApp extends Component {
       if (this.state.items[this.state.id]) {
         this.state.items[this.state.id] = {
           link: this.state.link,
-          title: this.state.title || this.state.link
+          title: this.state.title || this.state.link,
+          done: this.state.done
         }
       }
       this.setState({
@@ -62,11 +47,35 @@ export default class ReadingApp extends Component {
       var id = Date.now()
       var nextItems = this.state.items[id] = {
         link: this.state.link,
-        title: this.state.title || this.state.link 
+        title: this.state.title || this.state.link,
+        done: this.state.done
       };
     }
 
-    this.setState({link: '', title: ''});
+    this.setState({link: '', title: '', done: false});
+  };
+
+  updateItem = (id, item) => {
+    this.setState({
+      id: id,
+      link: item.link,
+      title: item.title,
+      done: item.done
+    })
+  };
+
+  deleteItem = (id, title) => {
+    const confirmation = window.confirm('Are you sure you want to delete ' + title + '?')
+    
+    if (confirmation && this.state.items.hasOwnProperty(id)) {
+      delete this.state.items[id];
+      this.forceUpdate();
+    }
+  };
+
+  doneItem = (id, item) => {
+    this.state.items[id].done = true;
+    this.forceUpdate();
   };
 
   render() {
@@ -80,7 +89,7 @@ export default class ReadingApp extends Component {
           {!_.isEmpty(this.state.id) && <button title="Edit">Edit</button> || <button title="Add blog to list">Add</button>}
         </form>
         <h2>Reading List</h2>
-        <ReadingList items={this.state.items} deleteItem={this.deleteItem} updateItem={this.updateItem}/>
+        <ReadingList items={this.state.items} deleteItem={this.deleteItem} updateItem={this.updateItem} doneItem={this.doneItem}/>
       </div>
     );
   }

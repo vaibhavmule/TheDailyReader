@@ -10,7 +10,8 @@ export default class ReadingList extends Component{
     var items = this.props.items
     return (
       <li key={key}>
-      	<a target="_blank" href={items[key].link}>{items[key].title}</a>
+      	<a target="_blank" href={items[key].link} style={{textDecoration: items[key].done ? 'line-through' : 'none'}} 
+        onClick={this.props.doneItem.bind(null, key, items[key])}>{items[key].title}</a>
         <button onClick={this.props.updateItem.bind(null, key, items[key])}>Edit</button>
         <button onClick={this.props.deleteItem.bind(null, key, items[key].title)}>Delete</button>
       </li>
