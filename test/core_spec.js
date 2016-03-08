@@ -47,6 +47,28 @@ describe('crud operation', () => {
       }));
     })
 
+    it('set the reading item as done to the state', () => {
+      const state = Map();
+      const nextState = create(state, {
+        id: 'abc123',
+        link: 'http://vaibhavmule.com',
+        title: 'vaibhav mule'
+      })
+      const updateState = update(nextState, 'abc123', {
+        link: 'http://foo-bar.com',
+        title: 'foo bar',
+        done: true
+      })
+      expect(updateState).to.equal(Map({
+        abc123: new ReadingItem({
+          id: 'abc123',
+          link: 'http://foo-bar.com',
+          title: 'foo bar',
+          done: true
+        })
+      }));
+    })
+
   })
 
   describe('delete', () => {
