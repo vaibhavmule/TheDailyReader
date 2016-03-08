@@ -1,4 +1,6 @@
-import { Record } from 'immutable';
+import { Map, Record } from 'immutable';
+
+export const INITIAL_STATE = Map();
 
 export var ReadingItem = Record({
   id: null,

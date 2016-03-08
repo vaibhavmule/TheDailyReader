@@ -6,6 +6,25 @@ import { ReadingItem } from '../src/core';
 
 describe('reducer', () => {
 
+  it('has an initial state', () => {
+    const action = {
+      type: 'ADD_READING_ITEM',
+      newReadingItem: {
+        id: 'abc123',
+        link: 'http://vaibhavmule.com',
+        title: 'vaibhav mule'
+      }
+    };
+    const nextState = reducer(undefined, action);
+    expect(nextState).to.equal(Map({
+      abc123: new ReadingItem({
+        id: 'abc123',
+        link: 'http://vaibhavmule.com',
+        title: 'vaibhav mule'
+      })
+    }))
+  });
+
   it('handles ADD_READING_ITEM', () => {
     const initialState = Map();
     const action = {
@@ -92,6 +111,39 @@ describe('reducer', () => {
         title: 'vaibhav mule'
       })
     }));
+  });
+
+  it('can be used with reduce', () => {
+    const actions = [{
+      type: 'ADD_READING_ITEM',
+      newReadingItem: {
+        id: 'abc123',
+        link: 'http://vaibhavmule.com',
+        title: 'vaibhav mule'
+      }
+    }, {
+      type: 'ADD_READING_ITEM',
+      newReadingItem: {
+        id: 'foo123',
+        link: 'http://foo-bar.com',
+        title: 'foo bar'
+      }
+    }];
+
+    const finalState = actions.reduce(reducer, Map());
+
+    expect(finalState).to.equal(Map({
+      abc123: new ReadingItem({
+        id: 'abc123',
+        link: 'http://vaibhavmule.com',
+        title: 'vaibhav mule'
+      }),
+      foo123: new ReadingItem({
+        id: 'foo123',
+        link: 'http://foo-bar.com',
+        title: 'foo bar'
+      })
+    }))
   });
 
 });

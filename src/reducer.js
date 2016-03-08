@@ -1,6 +1,6 @@
-import { ReadingItem, create, update, destroy } from './core';
+import { ReadingItem, INITIAL_STATE, create, update, destroy } from './core';
 
-export default function reducer(state, action) {
+export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'ADD_READING_ITEM':
       return create(state, action.newReadingItem);
