@@ -1,0 +1,19 @@
+# Todo list
+
+## Redux
+* actions, add, edit(text edit, link edit, read or not read), delete
+* header components, form components, list components, item compnents
+
+## points to remember
+* list should refresh and deread everything at 00.00 am every day. 
+
+###Future Feature
+* get title from website and stil give option edit a title for link
+* tell that you havn't readt it yesterday and putting off.
+* you should be able undo the edit.
+* database sync firebase
+* database sync browser
+* database sync spreadsheet
+* stats the how many time you have clicked on particuler website
+* history of clicks
+
