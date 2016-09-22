@@ -1,11 +1,13 @@
 import React from 'react'
+import Header from './Header'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
-const App = () => {
-  return (
-    <div>
-      <h1>Hello, World</h1>
-    </div>
-  )
-}
+injectTapEventPlugin()
+const App = () => (
+  <MuiThemeProvider>
+    <Header />
+  </MuiThemeProvider>
+)
 
 export default App
