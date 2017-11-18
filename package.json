@@ -4,7 +4,9 @@
   "description": "A bookmarking app for daily reading.",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,8 @@
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-localstorage": "^0.2.9",
-    "request": "^2.69.0"
-  }
+    "request": "^2.69.0",
+    "snyk": "^1.49.3"
+  },
+  "snyk": true
 }
